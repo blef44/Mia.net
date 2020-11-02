@@ -10,4 +10,4 @@ Projet d'application web pour un intranet familial
 
 * `npm start` dans le dossier principal
 
-L'application écoute actuellement sur localhost:1000
+L'application écoute actuellement sur localhost:3000

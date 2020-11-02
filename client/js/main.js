@@ -1,25 +1,40 @@
 'use strict';
 
-fillHeader();
-fillFooter();
+const headerContent = `<a href="/"><h1> Mia.net </h1></a>`;
+const footerContent = ``;
 
 function fillHeader() {
-    let header = document.querySelector('header');
+    const header = document.querySelector('header');
     if (header != null) {
-        header.innerHTML = `
-            <a href="/"><h1> Mia.net </h1></a>
-        `;
+        header.innerHTML = headerContent;
     } else {
-        console.warn('couldn\'t write header');
+        console.warn("No header found");
     }
 }
 function fillFooter() {
-    let footer = document.querySelector('footer');
+    const footer = document.querySelector('footer');
     if (footer != null) {
-        footer.innerHTML = `
-            
-        `;
+        footer.innerHTML = footerContent;
     } else {
-        console.warn('couldn\'t write footer');
+        console.warn("No footer found");
     }
 }
+
+function fetchJsonData(addr, callback) {
+    fetch(addr)
+    .then(function(response) {
+        if (response.ok) {
+            response.json()
+            .then(function(data) {
+                callback(data);
+            })
+            .catch(e => {console.error(e);});
+        } else {
+            console.error(response+" is not valid");
+        }
+    })
+    .catch(e => {console.error(e);});
+}
+
+fillHeader();
+fillFooter();
