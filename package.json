@@ -1,0 +1,10 @@
+{
+  "dependencies": {
+    "alasql": "^0.6.1",
+    "express": "^4.15.2",
+    "nodemon": "^1.11.0"
+  },
+  "scripts": {
+    "start": "node ./node_modules/nodemon/bin/nodemon.js --exec node server.js --ignore api/data/database.json"
+  }
+}
