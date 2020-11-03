@@ -1,6 +1,14 @@
 'use strict';
 
-const headerContent = `<a href="/"><h1> Mia.net </h1></a>`;
+const headerContent = `
+    <a href="/" id="main-title">
+        <h1>Mia.net</h1>
+    </a>
+    <nav>
+        <a href='/chat'>Chat</a>
+        <a href='#'>Forum</a>
+    </nav>
+`;
 const footerContent = ``;
 
 function fillHeader() {
