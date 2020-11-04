@@ -6,16 +6,25 @@
     <link rel="stylesheet" href="/css/style.css">
     <link rel="icon" type="image/png" href="/images/icon.png"/>
     <script src="js/main.js" defer></script>
+    <script src="js/user.js" defer></script>
     <script src="js/chat.js" defer></script>
 </head>
 
 <body>
 	<header></header>
+    <section id="user-choose">
+        <h2>Choisissez votre utilisateur</h2>
+        <div id="users">
+            <button id="user-add">Ajouter</button>
+        </div>
+    </section>
 	<section>
         <h2>Chat</h2>
 		<ul id="chat-messages"></ul>
-		<div id="message-input-zone"><input type="text" id="message-input" placeholder="Typez votre message ici"></input>
-        <button id="send">Envoyer</button></div>
+		<div id="message-input-zone">
+            <input type="text" id="message-input" placeholder="Typez votre message ici"></input>
+            <button id="send">Envoyer</button>
+        </div>
 	</section>
 	<footer></footer>
 </body>

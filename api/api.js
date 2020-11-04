@@ -6,15 +6,15 @@ const alasql = require('alasql');
 const bodyParser = require('body-parser');
 
 // import des modules
-//import messageController from './controllers/messageController.js';
-const messageController = require('./controllers/messageController.js');
+const UserController = require('./controllers/userController.js');
+const MessageController = require('./controllers/messageController.js');
 const testController = require('./controllers/testController.js');
 
 // export de notre application vers le serveur principal
 module.exports = () => {
 
     // création d'une app express
-    let app = express();
+    const app = express();
 
     // création de la base de données
     alasql(`
@@ -23,44 +23,33 @@ module.exports = () => {
         attach filestorage database mydb("./api/data/database.json");
         use mydb;
         -- Création des tables
-        create table if not exists Message(id INT PRIMARY KEY, sender VARCHAR(32), time INT, content VARCHAR(2048));
+        create table if not exists User(id INT PRIMARY KEY, name VARCHAR(32));
+        create table if not exists Room(id INT PRIMARY KEY, name VARCHAR(32));
+        create table if not exists Message(id INT PRIMARY KEY, sender INT, room INT, time INT, content VARCHAR(2048));
     `);
 
     app.use(bodyParser.json());
 
-    messageController(app);
     testController(app);
-    /*app.get('/test/dropAll', function(req, res) {
-        alasql(`
-            drop table Message;
-        `);
-        res.send('La base de donnée a été vidée de ses tables');
-    });
-    app.get('/test/clearAll', function(req, res) {
-        alasql(`
-            delete from Message;
-        `);
-        res.send('La base de donnée a été vidée de son contenu');
-    });
-    app.get('/test/insertExample', function(req, res) {
-        alasql(`
-             -- Insertion de données exemples
-            insert into Message(0, "Mia", 37, "Ceci est un message de test");
-        `);
-        res.send('Les données exemples ont été ajoutées');
-    });
 
-    app.get('/message/', function(req, res) {
-        let tuples = alasql('select * from Message;');
-        res.set({
-            'Content-Type': 'application/json',
-            'charset': 'utf-8'
-        });
-        res.send(JSON.stringify(tuples));
-    }); // liste messages
-    app.get('/message/:idMessage/', templateGet('idMessage', 'Message', 'id')); // infos et contenu message
+    app.get('/message/', JsonGet((req) => MessageController.getMessages()));
+    app.get('/room/:idRoom/messages/', JsonGet((req) => MessageController.getRoomMessages(req.params['idRoom'])));
+    app.get('/message/:idMessage', JsonGet((req) => MessageController.getMessage(req.params['idMessage'])));
+    app.post('/message/', (req, res) => MessageController.addMessage(req.body));
+    app.get('/user/', JsonGet((req) => UserController.getUsers()));
+    app.get('/user/:idUser', JsonGet((req) => UserController.getUser(req.params['idUser'])));
+    app.get('/user/name/:idUser', JsonGet((req) => UserController.getUserName(req.params['idUser'])));
+    app.post('/user/', (req, res) => UserController.addUser(req.body));
 
-    app.post('/message/', templatePost(true, ['sender', 'time', 'content'], 'Message'));*/
+    function JsonGet(callback) {
+        return function(req, res) {
+            res.set({
+                'Content-Type': 'application/json',
+                'charset': 'utf-8'
+            });
+            res.send(JSON.stringify(callback(req)));
+        };
+    }
 
     return app;
 }

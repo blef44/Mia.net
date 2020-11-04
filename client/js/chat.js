@@ -1,43 +1,68 @@
 'use strict';
 
-// require main.js
+// require main.js, user.js
 
 document.getElementById('send').addEventListener('click', sendMessage);
-getChatMessages();
+Update();
+
+function Update() {
+    getChatMessages();
+    getChatUser();
+    setTimeout(Update, 1000);
+}
 
 function getChatMessages() {
     // On récupère les messages du chat
-    fetchJsonData('api/message', (messages) => {
-        let chatMessages = document.getElementById('chat-messages');
-        chatMessages.innerHTML = '';
-        // On affiche les message dans la liste d'id "chatMessages"
-        for (let m in messages) {
-            let li = document.createElement('li');
-            chatMessages.appendChild(li);
-            li.innerHTML =
-                '<div class="message">'+
-                    '<h3>'+escapeHtml(messages[m].sender)+'</h3>'+
-                    '<p>'+escapeHtml(messages[m].content)+'</p>'+
-                '</div>';
-        }
+    fetchJsonData('/api/room/0/messages', (messages) => {
+        fetchJsonData('/api/user', (users) => {
+            const chatMessages = document.getElementById('chat-messages');
+            chatMessages.innerHTML = '';
+            // On affiche les message dans la liste d'id "chatMessages"
+            for (let m in messages) {
+                let li = document.createElement('li');
+                chatMessages.appendChild(li);
+                li.innerHTML =
+                    '<div class="message">'+
+                        '<h3>'+users.find(e=>e.id===messages[m].sender).name+'</h3>'+
+                        '<p>'+escapeHtml(messages[m].content)+'</p>'+
+                    '</div>';
+            }
+        })
     })
 }
 
-function sendMessage() {
-    const messageContent = document.getElementById('message-input').value;
-    console.log("Sending message: "+messageContent);
-    const message = {sender: "Mia", time: new Date().getTime(), content: messageContent};
-    fetch('/api/message', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json;charset=utf-8'
-        },
-        body: JSON.stringify(message)
-    })
-    /*.then(function(response) {
-         getChatMessages();
-    });*/
+function getChatUser() {
+    const messageInput = document.getElementById('message-input');
+    const sendButton = document.getElementById('send');
+    if (user === null) {
+        messageInput.placeholder = 'Choisissez un utilisateur pour commencer à chatter';
+        sendButton.disabled = true;
+    } else {
+        messageInput.placeholder = 'Typez votre message';
+        sendButton.disabled = false;
+    }
+}
 
+function sendMessage() {
+    if (user != null) {
+        const messageContent = document.getElementById('message-input').value;
+        console.log("Sending message: "+messageContent);
+        const message = {sender: user, room: 0, time: new Date().getTime(), content: messageContent};
+        fetch('/api/message', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json;charset=utf-8'
+            },
+            body: JSON.stringify(message)
+        })
+        .then(() => {
+            console.log("bite");
+            getChatMessages();
+        });
+        document.getElementById('message-input').value = '';
+    } else {
+        console.error("No user selected");
+    }
 }
 
 function escapeHtml(unsafe) {
