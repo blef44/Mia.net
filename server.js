@@ -12,3 +12,4 @@ const api = require('./api/api.js');
 app.use('/api', api());
 
 app.listen({host: "localhost", port: 3000});
+//app.listen({host: "192.168.1.18", port: 3000});

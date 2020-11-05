@@ -1,5 +1,5 @@
 const alasql = require('alasql');
 
-module.exports = function(table) {
-    return alasql('select count(*) from '+table)[0]['COUNT(*)'];
+module.exports = function(table, columnName = 'id') {
+    return alasql('select max('+columnName+') from '+table)[0]['MAX('+columnName+')']+1;
 }

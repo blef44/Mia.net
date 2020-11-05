@@ -20,9 +20,12 @@ module.exports = function(app) {
     app.get('/test/insertExample', function(req, res) {
         alasql(`
              -- Insertion de données exemples
-            insert into User(0, "Mia");
+            insert into User(0, "Efflam");
+            insert into User(1, "Bleuenn");
+            insert into User(2, "Maud");
+            insert into User(3, "Laurent");
             insert into Room(0, "Chat");
-            insert into Message(0, 0, 0, 37, "Ceci est un message de test");
+            insert into Message(0, 0, 0, 37, "Bonjour et bienvenue sur le chat");
         `);
         res.send('Les données exemples ont été ajoutées');
     });

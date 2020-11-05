@@ -43,12 +43,12 @@ section p {
 }
 
 header {
+  display: flex;
   padding: 5px 15px;
   margin-bottom: 15px;
   background-color: black;
 }
 h1 {
-  display: inline-block;
   color: rgb(95,255,63);
   font-family: Broadway;
   font-style: italic;
@@ -57,8 +57,9 @@ h1 {
   text-decoration: none;
 }
 header nav {
-  display: inline-block;
-  margin-left: 10%;
+  align-self: center;
+  text-align: center;
+  width: 100%;
 }
 header nav a {
   margin: 0 10px;
@@ -98,7 +99,6 @@ header nav a {
 }
 #send {
   float: right;
-  width: 50px;
   background-color: rgb(95,255,63);
   color: black;
   border: 2px solid #B0B0B0;
@@ -106,5 +106,38 @@ header nav a {
   border-radius: 3px 3px 20px 3px;
 }
 #send[disabled] {
-  background-color: rgb(63, 127, 31);
+  background-color: rgb(63,127,31);
+}
+
+#user-choose {
+  display: flex;
+  flex-wrap: wrap;
+}
+#user-choose button {
+  background-color: black;
+  color: rgb(191,191,191);
+  border: solid 2px rgb(191,191,191);
+  text-align: center;
+  font-size: 1em;
+}
+#user-choose button:hover {
+  background-color: rgb(63,63,63);
+  border-color: rgb(95,255,63);
+}
+.user {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  width: 200px;
+  height: 300px;
+}
+#user-choose > form {
+  order: 1;
+}
+#user-add {
+  height: 100%;
+  width: 100%;
+}
+#user-choose label {
+  margin: 5px;
 }

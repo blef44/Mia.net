@@ -5,6 +5,8 @@
 document.getElementById('send').addEventListener('click', sendMessage);
 Update();
 
+let renderedMessagesNumber = 8;
+
 function Update() {
     getChatMessages();
     getChatUser();
@@ -17,7 +19,7 @@ function getChatMessages() {
         fetchJsonData('/api/user', (users) => {
             const chatMessages = document.getElementById('chat-messages');
             chatMessages.innerHTML = '';
-            // On affiche les message dans la liste d'id "chatMessages"
+            messages = messages.slice(Math.max(0, messages.length-renderedMessagesNumber));
             for (let m in messages) {
                 let li = document.createElement('li');
                 chatMessages.appendChild(li);
@@ -46,16 +48,16 @@ function getChatUser() {
 function sendMessage() {
     if (user != null) {
         const messageContent = document.getElementById('message-input').value;
-        console.log("Sending message: "+messageContent);
         const message = {sender: user, room: 0, time: new Date().getTime(), content: messageContent};
+        console.log("Sending message: "+messageContent);
+        console.log(message);
         fetch('/api/message', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json;charset=utf-8'
             },
             body: JSON.stringify(message)
-        })
-        .then(() => {
+        }).then(() => {
             console.log("bite");
             getChatMessages();
         });
