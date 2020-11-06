@@ -24,8 +24,9 @@ module.exports = function(app) {
             insert into User(1, "Bleuenn");
             insert into User(2, "Maud");
             insert into User(3, "Laurent");
-            insert into Room(0, "Chat");
-            insert into Message(0, 0, 0, 37, "Bonjour et bienvenue sur le chat");
+            insert into Room(0, "Mot de passe Wifi");
+            insert into Message(0, 0, -1, 37, "Bonjour et bienvenue sur le chat");
+            insert into Message(1, 0, 0, 37, "Il serait pratique d'avoir un mdp wifi personnalisé. Quelles sont vos propositions ?");
         `);
         res.send('Les données exemples ont été ajoutées');
     });

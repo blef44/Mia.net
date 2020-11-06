@@ -32,22 +32,24 @@ module.exports = () => {
 
     testController(app);
 
-    app.get('/message/', JsonGet((req) => MessageController.getMessages()));
-    app.get('/room/:idRoom/messages/', JsonGet((req) => MessageController.getRoomMessages(req.params['idRoom'])));
-    app.get('/message/:idMessage', JsonGet((req) => MessageController.getMessage(req.params['idMessage'])));
-    app.post('/message/', (req, res) => MessageController.addMessage(req.body));
-    app.get('/user/', JsonGet((req) => UserController.getUsers()));
-    app.get('/user/:idUser', JsonGet((req) => UserController.getUser(req.params['idUser'])));
-    app.get('/user/name/:idUser', JsonGet((req) => UserController.getUserName(req.params['idUser'])));
-    app.post('/user/', (req, res) => UserController.addUser(req.body));
+    app.get('/message/',                JsonRoute((req, res) => MessageController.getMessages()));
+    app.get('/room/:idRoom/messages/',  JsonRoute((req, res) => MessageController.getRoomMessages(req.params['idRoom'])));
+    app.post('/message/',               JsonRoute((req, res) => MessageController.addMessage(req.body)));
+    app.get('/user/',                   JsonRoute((req, res) => UserController.getUsers()));
+    app.get('/user/:idUser',            JsonRoute((req, res) => UserController.getUser(req.params['idUser'])));
+    app.get('/user/name/:idUser',       JsonRoute((req, res) => UserController.getUserName(req.params['idUser'])));
+    app.post('/user/',                  JsonRoute((req, res) => UserController.addUser(req.body)));
+    app.get('/room/',                   JsonRoute((req, res) => MessageController.getRooms()));
+    app.get('/room/:idRoom',            JsonRoute((req, res) => MessageController.getRoom(req.params['idRoom'])));
+    app.post('/room/',                  JsonRoute((req, res) => MessageController.addRoom(req.body)));
 
-    function JsonGet(callback) {
+    function JsonRoute(callback) {
         return function(req, res) {
             res.set({
                 'Content-Type': 'application/json',
                 'charset': 'utf-8'
             });
-            res.send(JSON.stringify(callback(req)));
+            res.send(JSON.stringify(callback(req, res)));
         };
     }
 
