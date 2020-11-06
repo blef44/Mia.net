@@ -1,6 +1,6 @@
 const alasql = require('alasql');
-const SQL = function(s) { console.log(s); return alasql(s); }
-//const SQL = alasql;
+//const SQL = function(s) { console.log(s); return alasql(s); }
+const SQL = alasql;
 
 const Message = require('../model/Message.js');
 const Room = require('../model/Room.js');

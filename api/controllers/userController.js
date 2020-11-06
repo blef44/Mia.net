@@ -1,6 +1,6 @@
 const alasql = require('alasql');
-const SQL = function(s) { console.log(s); return alasql(s); }
-//const SQL = alasql;
+//const SQL = function(s) { console.log(s); return alasql(s); }
+const SQL = alasql;
 
 const User = require('../model/User.js');
 const autoId = require('../util/autoId');

@@ -2,14 +2,18 @@
 
 const headerContent = `
     <a href="/" id="main-title">
+        <img src="/images/icon.png" alt="logo" id="logo"/>
         <h1>Mia.net</h1>
     </a>
     <nav>
         <a href='/chat'>Chat</a>
-        <a href='#'>Forum</a>
+        <a href='/forum'>Forum</a>
     </nav>
 `;
 const footerContent = ``;
+
+fillHeader();
+fillFooter();
 
 function fillHeader() {
     const header = document.querySelector('header');
@@ -44,5 +48,11 @@ function fetchJsonData(addr, callback) {
     .catch(e => {console.error(e);});
 }
 
-fillHeader();
-fillFooter();
+function escapeHtml(unsafe) {
+    return unsafe
+         .replace(/&/g, "&amp;")
+         .replace(/</g, "&lt;")
+         .replace(/>/g, "&gt;")
+         .replace(/"/g, "&quot;")
+         .replace(/'/g, "&#039;");
+ }

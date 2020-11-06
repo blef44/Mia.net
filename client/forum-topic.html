@@ -8,24 +8,24 @@
     <script src="/js/main.js" defer></script>
     <script src="/js/user.js" defer></script>
     <script src="/js/message.js" defer></script>
-    <script src="/js/chat.js" defer></script>
+    <script src="/js/forum-topic.js" defer></script>
 </head>
 
 <body>
-	<header></header>
+    <header></header>
     <section id="user-choose-section">
         <h2>Choisissez votre utilisateur</h2>
         <div id="user-choose"></div>
         <div class="user"><label>Ajouter</label><input type="text" id="user-name" placeholder="nom d'utilisateur"/><button id="user-add" >Ok</button></div>
     </section>
-	<section>
-        <h2>Chat</h2>
-		<ul id="chat-messages"></ul>
-		<div id="message-input-zone">
-            <input type="text" id="message-input" placeholder="Typez votre message ici" disabled />
+    <section>
+        <h2 id="room-title">Forum - sujet inconnu</h2>
+        <ul id="forum-messages"></ul>
+        <div id="message-input-zone">
+            <input type="text" id="message-input" placeholder="Choisissez un utilisateur pour commencer à chatter" disabled />
             <button id="send" disabled>Envoyer</button>
         </div>
-	</section>
-	<footer></footer>
+    </section>
+    <footer></footer>
 </body>
 </html>

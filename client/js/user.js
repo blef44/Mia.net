@@ -20,9 +20,9 @@ function updateUser() {
 }
 
 function getUsers() {
+    const userChoose = document.getElementById('user-choose');
+    userChoose.innerHTML = '';
     fetchJsonData('/api/user', (users) => {
-        const userChoose = document.getElementById('user-choose');
-        //userChoose.innerHTML = '';
         for (let u in users) {
             let button = document.createElement('button');
             userChoose.appendChild(button);
@@ -37,21 +37,25 @@ function chooseUser(id) {
     return function() {
         user = id;
         updateUser();
+        onUserChosen();
     }
 }
 
-
 function createUser() {
     const userName = document.getElementById('user-name').value;
-    const user = { name: userName };
-    fetch('/api/user', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json;charset=utf-8'
-        },
-        body: JSON.stringify(user)
-    }).then(() => {
-        console.log("bite");
-        getUsers();
-    });
+    if (userName != "") {
+        const user = { name: userName };
+        console.log("creating user "+userName);
+        fetch('/api/user', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json;charset=utf-8'
+            },
+            body: JSON.stringify(user)
+        }).then((user) => {
+            getUsers();
+        });
+    } else {
+        console.error("empty user name");
+    }
 }
