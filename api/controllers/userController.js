@@ -22,6 +22,6 @@ module.exports = class UserController {
     static addUser(body) {
         const user = new User(body);
         let newId = autoId('User');
-        return SQL(`insert into User (${newId}, ${escapeString(user.name)});`);
+        return SQL(`insert into User (${newId}, ${escapeString(user.name)}, ${escapeString(user.picture)});`);
     }
 }

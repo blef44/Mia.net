@@ -3,7 +3,7 @@ module.exports = class Message {
         this.id = obj.id;
         this.sender = obj.sender;
         this.room = obj.room;
-        this.time = obj.time;
+        this.date = obj.date;
         this.content = obj.content;
     }
 }

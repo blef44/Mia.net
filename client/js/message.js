@@ -21,7 +21,7 @@ function getMessages(roomId, messagesUl) {
 function sendMessage(roomId, messageInput, messageUl) {
     if (user != null) {
         const messageContent = messageInput.value;
-        const message = {sender: user, room: roomId, time: new Date().getTime(), content: messageContent};
+        const message = {sender: user, room: roomId, date: new Date().getTime(), content: messageContent};
         console.log("Sending message: "+messageContent);
         fetch('/api/message', {
             method: 'POST',

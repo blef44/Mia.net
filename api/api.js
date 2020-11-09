@@ -23,9 +23,9 @@ module.exports = () => {
         attach filestorage database mydb("./api/data/database.json");
         use mydb;
         -- Création des tables
-        create table if not exists User(id INT PRIMARY KEY, name VARCHAR(32));
-        create table if not exists Room(id INT PRIMARY KEY, name VARCHAR(32));
-        create table if not exists Message(id INT PRIMARY KEY, sender INT, room INT, time INT, content VARCHAR(2048));
+        create table if not exists User(id INT PRIMARY KEY, name VARCHAR(32), picture VARCHAR(100));
+        create table if not exists Room(id INT PRIMARY KEY, name VARCHAR(32), creator INT, date INT);
+        create table if not exists Message(id INT PRIMARY KEY, sender INT, room INT, date INT, content VARCHAR(2048));
     `);
 
     app.use(bodyParser.json());

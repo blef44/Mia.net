@@ -20,11 +20,11 @@ module.exports = function(app) {
     app.get('/test/insertExample', function(req, res) {
         alasql(`
              -- Insertion de données exemples
-            insert into User(0, "Efflam");
-            insert into User(1, "Bleuenn");
-            insert into User(2, "Maud");
-            insert into User(3, "Laurent");
-            insert into Room(0, "Mot de passe Wifi");
+            insert into User(0, "Efflam", "avatar-red.png");
+            insert into User(1, "Bleuenn", "avatar-blue.png");
+            insert into User(2, "Maud", "avatar-green.png");
+            insert into User(3, "Laurent", "avatar-white.png");
+            insert into Room(0, "Mot de passe Wifi", 0, 37);
             insert into Message(0, 0, -1, 37, "Bonjour et bienvenue sur le chat");
             insert into Message(1, 0, 0, 37, "Il serait pratique d'avoir un mdp wifi personnalisé. Quelles sont vos propositions ?");
         `);

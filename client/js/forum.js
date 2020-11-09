@@ -22,7 +22,7 @@ function getRooms() {
 function createTopic() {
     const topicName = document.getElementById('topic-name').value;
     if (topicName != "") {
-        const room = { name: topicName };
+        const room = { name: topicName, creator: user, date: new Date().getTime() };
         console.log("Creating room "+topicName);
         fetch('/api/room', {
             method: 'POST',
