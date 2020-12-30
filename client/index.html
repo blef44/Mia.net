@@ -6,6 +6,8 @@
     <link rel="stylesheet" href="/css/style.css">
     <link rel="icon" type="image/png" href="/images/icon.png"/>
     <script src="/js/main.js" defer></script>
+    <script src="/js/message.js" defer></script>
+    <script src="/js/home.js" defer></script>
 </head>
 
 <body>
@@ -19,14 +21,19 @@
         </p>
         <figure id="mia-calin">
             <figcaption>Crédits : Bleuenn</figcaption>
+            <figcaption id="en-bas"><div>Suggestion de présentation</div></figcaption>
             <img src="/images/Mia-calin.jpg" alt="Photo de Mia couchée sur la terrasse" width="500px"/>
         </figure>
         <p>
             Le code source de l'application web est disponible sur : <a href="https://github.com/blef44/Mia.net">github.com/blef44/Mia.net</a>.
             C'est développé en HTML, CSS et JavaScript.
-            Si vous voulez y prendre part, n'hésitez pas à me demander sur le chat, il faudrait par exemple des images, et un texte un peu mieux pour cette page d'accueil.
+            Si vous voulez y prendre part, n'hésitez pas à me demander sur le chat.
         </p>
 	</section>
+    <section>
+        <h2>Derniers messages</h2>
+        <ul id="messages"></ul>
+    </section>
 	<footer></footer>
 </body>
 </html>
