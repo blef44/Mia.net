@@ -26,7 +26,7 @@ module.exports = class MessageController {
     static addMessage(body) {
         const message = new Message(body);
         const newId = autoId('Message');
-        return SQL(`insert into Message (${newId}, ${message.sender}, ${message.room}, ${message.time}, ${escapeString(message.content)});`);
+        return SQL(`insert into Message (${newId}, ${message.sender}, ${message.room}, ${message.date}, ${escapeString(message.content)});`);
     }
     static deleteMessage(id) {
         SQL(`delete from Message where id = ${id};`);
@@ -43,6 +43,6 @@ module.exports = class MessageController {
     static addRoom(body) {
         const room = new Room(body);
         let newId = autoId('Room');
-        return SQL(`insert into Room (${newId}, ${escapeString(room.name)});`);
+        return SQL(`insert into Room (${newId}, ${escapeString(room.name)}, ${room.creator}, ${room.date});`);
     }
 }
