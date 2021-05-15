@@ -6,8 +6,10 @@ const headerContent = `
         <h1>Mia.net</h1>
     </a>
     <nav>
+        <a href='/'>Accueil</a>
         <a href='/chat'>Chat</a>
         <a href='/forum'>Forum</a>
+        <a href='/file'>Fichiers</a>
     </nav>
 `;
 const footerContent = ``;
